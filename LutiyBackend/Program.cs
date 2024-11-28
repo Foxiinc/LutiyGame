@@ -10,12 +10,5 @@ builder.Services.AddDbContext<MyDbContext>(options =>
 
 var app = builder.Build();
 
-// Пример получения пользователей
-app.MapGet("/users", async (MyDbContext db) =>
-{
-#pragma warning disable CS8604 // Possible null reference argument.
-    return await db.Users.ToListAsync();
-#pragma warning restore CS8604 // Possible null reference argument.
-});
 
 app.Run();

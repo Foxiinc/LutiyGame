@@ -20,6 +20,34 @@ namespace LutiyBackend.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("Servers", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CountBytes")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("ServerName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("UsersId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UsersId");
+
+                    b.ToTable("Servers");
+                });
+
             modelBuilder.Entity("Users", b =>
                 {
                     b.Property<int>("Id")
@@ -31,13 +59,13 @@ namespace LutiyBackend.Migrations
                     b.Property<int>("CountBoosts")
                         .HasColumnType("integer");
 
-                    b.Property<int>("CountBytes")
+                    b.Property<int>("CountBytesAll")
                         .HasColumnType("integer");
 
                     b.Property<int>("CountRefs")
                         .HasColumnType("integer");
 
-                    b.Property<int>("CountSphere")
+                    b.Property<int>("CountServers")
                         .HasColumnType("integer");
 
                     b.Property<string>("Name")
@@ -49,12 +77,25 @@ namespace LutiyBackend.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("idServer")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Servers", b =>
+                {
+                    b.HasOne("Users", "Users")
+                        .WithMany("Servers")
+                        .HasForeignKey("UsersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("Users", b =>
+                {
+                    b.Navigation("Servers");
                 });
 #pragma warning restore 612, 618
         }
