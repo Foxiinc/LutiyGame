@@ -21,11 +21,24 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
         document.body.appendChild(renderer.domElement);
 
-        // Создание ядра
+        // Загрузка текстуры для фона
+        const backgroundTexture = new THREE.TextureLoader().load('images/sss.png'); // Укажите путь к вашей текстуре фона
+
+        // Создание сферы фона
+        const backgroundSphereGeometry = new THREE.SphereGeometry(30, 35, 35);
+        const backgroundSphereMaterial = new THREE.MeshBasicMaterial({ map: backgroundTexture, side: THREE.BackSide });
+        const backgroundSphere = new THREE.Mesh(backgroundSphereGeometry, backgroundSphereMaterial);
+        scene.add(backgroundSphere);
+
+        // Загрузка текстуры для ядра
+        const textureLoader = new THREE.TextureLoader();
+        const coreTexture = textureLoader.load('images/fffaaa.png');
+
+        // Создание геометрии и материала для ядра
         const coreGeometry = new THREE.SphereGeometry(0.5, 32, 32);
-        const coreMaterial = new THREE.MeshBasicMaterial({ color: 0xffff00 });
+        const coreMaterial = new THREE.MeshBasicMaterial({ map: coreTexture });
         const core = new THREE.Mesh(coreGeometry, coreMaterial);
-        scene.add(core);
+        scene.add(core); 
 
         // Создание системы частиц
         const particlesCount = 1000;
@@ -34,12 +47,10 @@
         const colors = new Float32Array(particlesCount * 3);
 
         for (let i = 0; i < particlesCount; i++) {
-            // Установка случайных позиций для частиц
-            positions[i * 3] = (Math.random() - 0.5) * 20; // x
-            positions[i * 3 + 1] = (Math.random() - 0.5) * 20; // y
-            positions[i * 3 + 2] = (Math.random() - 0.5) * 20; // z
+            positions[i * 3] = (Math.random() - 0.5) * 100;
+            positions[i * 3 + 1] = (Math.random() - 0.5) * 100;
+            positions[i * 3 + 2] = (Math.random() - 0.5) * 100;
 
-            // Установка случайных цветов для частиц (радужные цвета)
             const color = new THREE.Color(Math.random(), Math.random(), Math.random());
             colors[i * 3] = color.r;
             colors[i * 3 + 1] = color.g;
@@ -49,8 +60,7 @@
         particles.setAttribute('position', new THREE.BufferAttribute(positions, 3));
         particles.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
-        // Установка размера частиц
-        const particleMaterial = new THREE.PointsMaterial({ size: 0.01, vertexColors: true });
+        const particleMaterial = new THREE.PointsMaterial({ size: 0.03, vertexColors: true });
         const particleSystem = new THREE.Points(particles, particleMaterial);
         scene.add(particleSystem);
 
@@ -61,7 +71,7 @@
         let phi = 0;
         let radius = 5;
 
-        // Создание текстовых объектов (нолики и единицы)
+        // Создание текстовых объектов
         const textLoader = new THREE.FontLoader();
         const texts = [];
         const textCount = 10;
@@ -79,7 +89,7 @@
                 const textMesh = new THREE.Mesh(textGeometry, textMaterial);
                 
                 const distanceFromCore = 1.5 + (i * 0.1);
-                const angle = (i % 2 === 0 ? 1 : -1) * Math.random() * Math.PI * 2;
+                const angle = (i % 2 === 0 ?  1 : -1) * Math.random() * Math.PI * 2;
                 textMesh.position.set(distanceFromCore * Math.cos(angle), 0, distanceFromCore * Math.sin(angle));
                 scene.add(textMesh);
                 texts.push(textMesh);
@@ -89,7 +99,7 @@
         });
 
         // Обработчики событий мыши
-        window.addEventListener ('mousedown', (event) => {
+        window.addEventListener('mousedown', (event) => {
             isMouseDown = true;
             previousMousePosition = { x: event.clientX, y: event.clientY };
         });
@@ -150,10 +160,13 @@
             previousMousePosition = { x: event.touches[0].clientX, y: event.touches[0].clientY };
         });
 
+        // Максимальное расстояние для камеры
+        const maxRadius = 15; // Установите максимальное значение по вашему усмотрению
+
         // Обработка прокрутки для зума
         window.addEventListener('wheel', (event) => {
             radius += event.deltaY * 0.01;
-            radius = Math.max(2, Math.min(100, radius));
+            radius = Math.max(2, Math.min(maxRadius, radius)); // Ограничиваем radius
             const x = radius * Math.cos(phi) * Math.sin(theta);
             const y = radius * Math.sin(phi);
             const z = radius * Math.cos(phi) * Math.cos(theta);
@@ -172,7 +185,7 @@
                 const z = positions[index + 2];
 
                 const direction = new THREE.Vector3(core.position.x - x, core.position.y - y, core.position.z - z).normalize();
-                const speed = 0.003;
+                const speed = 0.009;
 
                 positions[index] += direction.x * speed;
                 positions[index + 1] += direction.y * speed;
@@ -198,7 +211,7 @@
 
         // Функция для обновления позиций текстов
         function updateTextPositions() {
-        const rotationSpeed = 0.01;
+            const rotationSpeed = 0.01;
             texts.forEach((textMesh, index) => {
                 randomAngles[index] += rotationSpeed;
                 const distanceFromCore = textDistances[index];
@@ -217,43 +230,6 @@
             updateParticlePositions(); // Обновляем позиции частиц
             updateCameraPosition();
             updateTextPositions(); // Обновляем позиции текстов
-            renderer.render(scene, camera);
-        }
-        
-        const cubeGeometry = new THREE.BoxGeometry(20, 20, 20);
-        const cubeMaterial = new THREE.MeshBasicMaterial({ 
-            vertexColors: true, 
-            transparent: true, // Включаем прозрачность
-            opacity: 0.5 // Устанавливаем уровень прозрачности (0 - полностью прозрачный, 1 - полностью непрозрачный)
-        });
-        const cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
-        scene.add(cube);
-
-        // Функция для установки цветов вершин куба
-        function setCubeColors() {
-            const colors = [];
-            for (let i = 0; i < cubeGeometry.attributes.position.count; i++) {
-                const color = new THREE.Color();
-                color.setHSL(i / cubeGeometry.attributes.position.count, 1, 0.5); // Градиент от зелёного к красному
-                colors.push(color.r, color.g, color.b);
-            }
-            cubeGeometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
-        }
-
-        // Устанавливаем цвета куба
-        setCubeColors();
-
-        // Анимация
-        function animate() {
-            requestAnimationFrame(animate);
-            updateParticlePositions(); // Обновляем позиции частиц
-            updateCameraPosition();
-            updateTextPositions(); // Обновляем позиции текстов
-
-            // Вращаем куб для эффекта
-            cube.rotation.x += 0.01;
-            cube.rotation.y += 0.01;
-
             renderer.render(scene, camera);
         }
 
