@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Kirill1719\\Desktop\\Projects\\backClicker\\LutiyBackend\\LutiyBackend.csproj": {}
+    "C:\\Users\\Kirill1719\\Desktop\\Projects\\LutiyGame\\LutiyBackend\\LutiyBackend.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Kirill1719\\Desktop\\Projects\\backClicker\\LutiyBackend\\LutiyBackend.csproj": {
+    "C:\\Users\\Kirill1719\\Desktop\\Projects\\LutiyGame\\LutiyBackend\\LutiyBackend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Kirill1719\\Desktop\\Projects\\backClicker\\LutiyBackend\\LutiyBackend.csproj",
+        "projectUniqueName": "C:\\Users\\Kirill1719\\Desktop\\Projects\\LutiyGame\\LutiyBackend\\LutiyBackend.csproj",
         "projectName": "LutiyBackend",
-        "projectPath": "C:\\Users\\Kirill1719\\Desktop\\Projects\\backClicker\\LutiyBackend\\LutiyBackend.csproj",
+        "projectPath": "C:\\Users\\Kirill1719\\Desktop\\Projects\\LutiyGame\\LutiyBackend\\LutiyBackend.csproj",
         "packagesPath": "C:\\Users\\Kirill1719\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Kirill1719\\Desktop\\Projects\\backClicker\\LutiyBackend\\obj\\",
+        "outputPath": "C:\\Users\\Kirill1719\\Desktop\\Projects\\LutiyGame\\LutiyBackend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Kirill1719\\AppData\\Roaming\\NuGet\\NuGet.Config",

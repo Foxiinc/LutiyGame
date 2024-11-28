@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "rSdl9cxmJA8=",
+  "dgSpecHash": "fCv9b056uj4=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Kirill1719\\Desktop\\Projects\\backClicker\\LutiyBackend\\LutiyBackend.csproj",
+  "projectFilePath": "C:\\Users\\Kirill1719\\Desktop\\Projects\\LutiyGame\\LutiyBackend\\LutiyBackend.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Kirill1719\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\Kirill1719\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.0\\microsoft.aspnetcore.openapi.9.0.0.nupkg.sha512",
