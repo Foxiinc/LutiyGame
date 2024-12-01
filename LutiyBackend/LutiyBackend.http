@@ -1,6 +1,0 @@
-@LutiyBackend_HostAddress = http://localhost:5256
-
-GET {{LutiyBackend_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

@@ -1,0 +1,6 @@
+@LutiyGame_HostAddress = http://localhost:5092
+
+GET {{LutiyGame_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

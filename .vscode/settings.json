@@ -1,4 +1,3 @@
 {
-    "dotnet.defaultSolution": "LutiyBackend.sln",
-    "liveServer.settings.port": 5501
+    "dotnet.defaultSolution": "LutiyPeredel.sln"
 }
