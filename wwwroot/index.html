@@ -3,12 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Test Page</title>
+    <title>Rainbow Particles with Core</title>
+    <link href="styles.css" rel="stylesheet"> <!-- Link to external CSS file -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet"> <!-- Link to font -->
 </head>
 <body>
-    <h1>Welcome to the Test Page</h1>
-    <p>This page is used to test the backend functionality.</p>
-    <script src="script.js"></script>
+
+    <div class="button-container">
+        <button class="button" onclick="navigate()">
+            <img src="path/to/navigation-image.png" alt="">
+        </button>
+        <button class="button" onclick="toggleMyPlanetMenu()">
+            My Planet
+        </button>
+        <button class="button" onclick="profile()">
+            <img src="images/m.png" alt=""> <!-- Image button -->
+        </button>
+    </div>
+
+    <div id="myPlanetMenu" class="menu" style="display: none;">
+        <h2>My Planet Menu</h2>
+        <button class="menu-button" onclick="option1()">Option 1</button>
+        <button class="menu-button" onclick="option2()">Option 2</button>
+        <button class="menu-button" onclick="closeMyPlanetMenu()">Close</button>
+    </div>
+
+    <div id="profileMenu" class="menu">
+        <div class="profile-header">
+            <h2>Nickname</h2> <!-- Here is your nickname -->
+            <button class="button" onclick="showTopPosition()"></button>
+        </div>
+        
+        <div class="menu-buttons">
+            <button class="menu-button" onclick="servers()">Servers</button>
+            <button class="menu-button" onclick="bytesCount()">Bytes Count</button>
+            <button class="menu-button" onclick="bytesPerHour()">Bytes per Hour</button>
+            <button class="menu-button" onclick="copyReferralLink()">Referral Link</button>
+            <button class="menu-button" onclick="tasks()">Tasks</button>
+        </div>
+
+        <button class="button" onclick="closeProfileMenu()">Close</button>
+    </div>
+
+    <!-- Adding Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="js/main.js"></script> <!-- Link to the new JS file -->
+
+    <div class="bottom-button-container">
+        <button class="bottom-button" onclick="createBytes()">
+            Create Bytes
+        </button>
+        <button class="bottom-button" onclick="collectBytes()">
+            Collect Bytes
+        </button>
+    </div>
 </body>
 </html>

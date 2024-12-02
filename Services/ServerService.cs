@@ -13,7 +13,7 @@ namespace Services
             _serversRepository = serversRepository;
         }
 
-        public async Task<Server> GetServerByIdAsync(int id)
+        public async Task<Server> GetServerById(int userid, int id)
         {
             return await _serversRepository.GetServerByIdAsync(id);
         }
